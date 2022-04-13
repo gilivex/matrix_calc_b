@@ -12,11 +12,12 @@ namespace zich {
         int column;
 
     public:
-        Matrix(const vector<double> &v, int r, unsigned long  c) : row(r), column(c) {
+        Matrix(const vector<double> &v, int r, int c) : row(r), column(c) {
+            unsigned long col = (unsigned long)c;
             for (unsigned long i = 0; i < r; ++i) {
                 vector<double> temp;
                 for (unsigned long j = 0; j < c; ++j) {
-                    temp.push_back(v.at( i * c + j));
+                 temp.push_back(v.at( i * col + j));
                 }
                 mat.push_back(temp);
             }

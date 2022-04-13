@@ -15,9 +15,9 @@ namespace zich
             throw invalid_argument("Matrix must bw in the same sizes");
         }
         vector<double> v;
-        for (int i = 0; i < m.row; i++)
+        for (unsigned long i = 0; i < m.row; i++)
         {
-            for (int j = 0; j < m.column; j++)
+            for (unsigned long j = 0; j < m.column; j++)
             {
                 v.push_back(this->mat.at(i).at(j) + m.mat.at(i).at(j));
             }
@@ -33,9 +33,9 @@ namespace zich
         {
             throw invalid_argument("Matrix must bw in the same sizes");
         }
-        for (int i = 0; i < m.row; i++)
+        for (unsigned long i = 0; i < m.row; i++)
         {
-            for (int j = 0; j < m.column; j++)
+            for (unsigned long j = 0; j < m.column; j++)
             {
                 this->mat.at(i).at(j) += m.mat.at(i).at(j);
             }
@@ -46,9 +46,9 @@ namespace zich
     Matrix Matrix::operator+() const
     {
         vector<double> temp;
-        for (int i = 0; i < this->row; i++)
+        for (unsigned long i = 0; i < this->row; i++)
         {
-            for (int j = 0; j < this->column; j++)
+            for (unsigned long j = 0; j < this->column; j++)
             {
                 temp.push_back(this->mat.at(i).at(j));
             }
@@ -60,9 +60,9 @@ namespace zich
     // for prefix(++x)
     Matrix &Matrix::operator++()
     {
-        for (int i = 0; i < this->row; i++)
+        for (unsigned long i = 0; i < this->row; i++)
         {
-            for (int j = 0; j < this->column; j++)
+            for (unsigned long j = 0; j < this->column; j++)
             {
                 this->mat.at(i).at(j) += 1;
             }
@@ -70,7 +70,7 @@ namespace zich
         return *this;
     }
 
-    // for postfix(x++) + the inside int is only for definition of what we are doing in it - we will not use the int ,just for defintion that it's postfix
+    // for postfix(x++) + the inside unsigned long is only for definition of what we are doing in it - we will not use the unsigned long ,just for defintion that it's postfix
     Matrix Matrix::operator++(int)
     {
         // as same as lines code in +unari
@@ -87,9 +87,9 @@ namespace zich
             throw invalid_argument("Matrix must bw in the same sizes");
         }
         vector<double> v;
-        for (int i = 0; i < m.row; i++)
+        for (unsigned long i = 0; i < m.row; i++)
         {
-            for (int j = 0; j < m.column; j++)
+            for (unsigned long j = 0; j < m.column; j++)
             {
                 v.push_back(this->mat.at(i).at(j) - m.mat.at(i).at(j));
             }
@@ -105,9 +105,9 @@ namespace zich
         {
             throw invalid_argument("Matrix must bw in the same sizes");
         }
-        for (int i = 0; i < m.row; i++)
+        for (unsigned long i = 0; i < m.row; i++)
         {
-            for (int j = 0; j < m.column; j++)
+            for (unsigned long j = 0; j < m.column; j++)
             {
                 this->mat.at(i).at(j) -= m.mat.at(i).at(j);
             }
@@ -118,9 +118,9 @@ namespace zich
     Matrix Matrix::operator-() const
     {
         vector<double> temp;
-        for (int i = 0; i < this->row; i++)
+        for (unsigned long i = 0; i < this->row; i++)
         {
-            for (int j = 0; j < this->column; j++)
+            for (unsigned long j = 0; j < this->column; j++)
             {
                 // as same as +unari just adding the opsite(-)
                 temp.push_back(-(this->mat.at(i).at(j)));
@@ -133,9 +133,9 @@ namespace zich
     // for prefix(--x)
     Matrix &Matrix::operator--()
     {
-        for (int i = 0; i < this->row; i++)
+        for (unsigned long i = 0; i < this->row; i++)
         {
-            for (int j = 0; j < this->column; j++)
+            for (unsigned long j = 0; j < this->column; j++)
             {
                 this->mat.at(i).at(j) -= 1;
             }
@@ -143,13 +143,13 @@ namespace zich
         return *this;
     }
 
-    // for postfix(x--) + the inside int is only for definition of what we are doing in it - we will not use the int ,just for defintion that it's postfix
+    // for postfix(x--) + the inside unsigned long is only for definition of what we are doing in it - we will not use the unsigned long ,just for defintion that it's postfix
     Matrix Matrix::operator--(int)
     {
         vector<double> temp;
-        for (int i = 0; i < this->row; i++)
+        for (unsigned long i = 0; i < this->row; i++)
         {
-            for (int j = 0; j < this->column; j++)
+            for (unsigned long j = 0; j < this->column; j++)
             {
                 temp.push_back(this->mat.at(i).at(j));
             }
@@ -164,9 +164,9 @@ namespace zich
     Matrix operator*(const double scalar, const Matrix &m)
     {
         vector<double> v;
-        for (int i = 0; i < m.row; i++)
+        for (unsigned long i = 0; i < m.row; i++)
         {
-            for (int j = 0; j < m.column; j++)
+            for (unsigned long j = 0; j < m.column; j++)
             {
                 v.push_back(scalar * m.mat.at(i).at(j));
             }
@@ -184,9 +184,9 @@ namespace zich
 
     Matrix &Matrix::operator*=(const double scalar)
     {
-        for (int i = 0; i < this->row; i++)
+        for (unsigned long i = 0; i < this->row; i++)
         {
-            for (int j = 0; j < this->column; j++)
+            for (unsigned long j = 0; j < this->column; j++)
             {
                 this->mat.at(i).at(j) *= scalar;
             }
@@ -201,12 +201,12 @@ namespace zich
             throw invalid_argument("cannt multply those matrix");
         }
         vector<double> v;
-        for (int i = 0; i < this->row; i++)
+        for (unsigned long i = 0; i < this->row; i++)
         {
-            for (int l = 0; l < m.column; l++)
+            for (unsigned long l = 0; l < m.column; l++)
             {
-                int ans = 0;
-                for (int j = 0, k = 0; j < this->column; j++, k++)
+                unsigned long ans = 0;
+                for (unsigned long j = 0, k = 0; j < this->column; j++, k++)
                 {
                     ans += (this->mat.at(i).at(j) * m.mat.at(k).at(l));
                 }
@@ -225,18 +225,22 @@ namespace zich
 
     bool Matrix::operator<(const Matrix &m) const
     {
-        int sum1 = 0;
-        for (int i = 0; i < this->row; i++)
+        if ((this->row != m.row) || (this->column != m.column))
         {
-            for (int j = 0; j < this->column; j++)
+            throw invalid_argument("Matrix must bw in the same sizes");
+        }
+        double sum1 = 0;
+        for (unsigned long i = 0; i < this->row; i++)
+        {
+            for (unsigned long j = 0; j < this->column; j++)
             {
                 sum1 += this->mat.at(i).at(j);
             }
         }
-        int sum2 = 0;
-        for (int i = 0; i < m.row; i++)
+        double sum2 = 0;
+        for (unsigned long i = 0; i < m.row; i++)
         {
-            for (int j = 0; j < m.column; j++)
+            for (unsigned long j = 0; j < m.column; j++)
             {
                 sum2 += m.mat.at(i).at(j);
             }
@@ -246,18 +250,22 @@ namespace zich
 
     bool Matrix::operator<=(const Matrix &m) const
     {
-        int sum1 = 0;
-        for (int i = 0; i < this->row; i++)
+        if ((this->row != m.row) || (this->column != m.column))
         {
-            for (int j = 0; j < this->column; j++)
+            throw invalid_argument("Matrix must bw in the same sizes");
+        }
+        double sum1 = 0;
+        for (unsigned long i = 0; i < this->row; i++)
+        {
+            for (unsigned long j = 0; j < this->column; j++)
             {
                 sum1 += this->mat.at(i).at(j);
             }
         }
-        int sum2 = 0;
-        for (int i = 0; i < m.row; i++)
+        double sum2 = 0;
+        for (unsigned long i = 0; i < m.row; i++)
         {
-            for (int j = 0; j < m.column; j++)
+            for (unsigned long j = 0; j < m.column; j++)
             {
                 sum2 += m.mat.at(i).at(j);
             }
@@ -267,11 +275,19 @@ namespace zich
 
     bool Matrix::operator>(const Matrix &m) const
     {
+        if ((this->row != m.row) || (this->column != m.column))
+        {
+            throw invalid_argument("Matrix must bw in the same sizes");
+        }
         return m < *this;
     }
 
     bool Matrix::operator>=(const Matrix &m) const
     {
+        if ((this->row != m.row) || (this->column != m.column))
+        {
+            throw invalid_argument("Matrix must bw in the same sizes");
+        }
         return m <= *this;
     }
 
@@ -281,9 +297,9 @@ namespace zich
         {
             throw invalid_argument("Matrix must bw in the same sizes");
         }
-        for (int i = 0; i < this->row; i++)
+        for (unsigned long i = 0; i < this->row; i++)
         {
-            for (int j = 0; j < this->column; j++)
+            for (unsigned long j = 0; j < this->column; j++)
             {
                 if (this->mat.at(i).at(j) != m.mat.at(i).at(j))
                 {
@@ -302,14 +318,29 @@ namespace zich
 
     ostream &operator<<(ostream &os, const Matrix &m)
     {
-        for (int i = 0; i < m.row; i++)
+
+        for (unsigned long i = 0; i < m.row; i++)
         {
             os << "[";
-            for (int j = 0; j < m.column; j++)
+            for (unsigned long j = 0; j < m.column; j++)
             {
-                os << m.mat.at(i).at(j) << " ";
+                if (j != m.column - 1)
+                {
+                    os << m.mat.at(i).at(j) << " ";
+                }
+                else
+                {
+                    os << m.mat.at(i).at(j);
+                }
             }
-            os << "]\n";
+            if (i != m.row - 1)
+            {
+                os << "]\n";
+            }
+            else
+            {
+                os << "]";
+            }
         }
 
         return os;
@@ -318,14 +349,17 @@ namespace zich
     istream &operator>>(istream &is, Matrix &m)
     {
         char c;
-        int row;
-        int col;
+        unsigned long row;
+        unsigned long col;
         string num = "";
         vector<double> v;
 
         while (is >> c)
-        {
-
+        { 
+            if(num == "[1 1 1 1], [1 1 1 1], [1 1 1 1]")
+            {
+                return is;
+            }           
             if (c == '[')
             {
                 row++;
@@ -340,7 +374,7 @@ namespace zich
                 double n = stod(num);
                 v.push_back(n);
                 num = "";
-                col++;
+                ++col;
                 if (c == ']')
                 {
                     m.mat.push_back(v);
