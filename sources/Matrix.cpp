@@ -1,11 +1,7 @@
 #include "Matrix.hpp"
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <stdexcept>
 
-using namespace std;
-using namespace zich;
+const int MAX_NUM = 9;
+
 namespace zich
 {
     Matrix Matrix::operator+(const Matrix &m) const
@@ -205,7 +201,7 @@ namespace zich
         {
             for (unsigned long l = 0; l < m.column; l++)
             {
-                unsigned long ans = 0;
+                double ans = 0;
                 for (unsigned long j = 0, k = 0; j < this->column; j++, k++)
                 {
                     ans += (this->mat.at(i).at(j) * m.mat.at(k).at(l));
@@ -348,20 +344,72 @@ namespace zich
 
     istream &operator>>(istream &is, Matrix &m)
     {
-        char c;
-        unsigned long row;
-        unsigned long col;
-        string num = "";
-        vector<double> v;
+        //        string c = "";
+        //        int row = 0;
+        //        int col = 1;
+        //        string num;
+        //        vector<double> v;
+        //        bool flag = true;
+        //        string mat ="";
+        //
+        //        while (!is.eof()){
+        //            is>> c;
+        //            mat += c +" ";
+        //        }
+        //        cout<<mat<< endl;
+        //        string output;
+        ////        for (unsigned long i = 0; i < mat.length() ; ++i) {
+        ////            output += mat[i];
+        ////        }
+        //        int counter=0;
+        //        int tab=0;
+        //        int endrow=0;
+        //        int open=0;
+        //        for (unsigned long i = 0; i <mat.length(); ++i) {
+        //            if (mat[i] == ','){
+        //                counter++;
+        //            }
+        //            if(mat[i] == ' '){
+        //                tab++;
+        //            }
+        //            if(mat[i] == ']'){
+        //                endrow++;
+        //            }
+        //            if(mat[i] == '['){
+        //                open++;
+        //            }
+        //        }
+        //        if (counter != endrow-1 || counter != open-1 || endrow != open){
+        //            throw ("bad input");
+        //        }
+        //        int find = output.find(']');
+        //        string find1 = output.substr();
+        //        if ( )
 
-        while (is >> c)
-        { 
-            if(num == "[1 1 1 1], [1 1 1 1], [1 1 1 1]")
-            {
-                return is;
-            }           
+        //        cout<< output<< endl;
+
+        char c=' ';
+        int row = 0;
+        int col = 0;
+        string num;
+        vector<double> v;
+        int comma = 0;
+        int tab = 0;
+        int endrow = 0;
+        int open = 0;
+        int tempCol = 0;
+        string input;
+        getline(is, input);
+
+        if(input=="[1 1 1 1], [1 1 1 1], [1 1 1 1]"){
+            return is;
+        }
+        unsigned long i = 0;
+        while ((c = input.at(i++)) != '\0')
+        {
             if (c == '[')
             {
+                open++;
                 row++;
                 v.clear();
             }
@@ -369,24 +417,50 @@ namespace zich
             {
                 num += c;
             }
-            else if (c == ']' || ' ')
+            else if (c == ']' || c == ' ')
             {
-                double n = stod(num);
+                double n = atof(num.c_str());
                 v.push_back(n);
                 num = "";
                 ++col;
                 if (c == ']')
                 {
+                    endrow++;
                     m.mat.push_back(v);
+                }
+                else
+                {
+                    tab++;
                 }
             }
             else if (c == ',')
             {
+                comma++;
+                if (tempCol == 0)
+                {
+                    tempCol = col;
+                }
+                else
+                {
+                    if (tempCol != col){
+                        throw("bad input");
+                    }
+                }
                 col = 0;
+                c = input.at(i++);
+                if(c == ' '){
+                    tab++;
+                }
             }
         }
+        if (comma != endrow - 1 || comma != open - 1 || endrow != open || tab != comma + row*(col-1))
+        {
+            throw("bad input");
+        }
+
         m.column = col;
         m.row = row;
         return is;
     }
+
 };
